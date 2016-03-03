@@ -86,10 +86,10 @@ class PageView(
         return payload
 
 
-class Event(Requestable, namedtuple('Event', 'category action label value')):
+class Event(Requestable, namedtuple('Event', 'category action label value custom1')):
 
-    def __new__(cls, category, action, label=None, value=None):
-        return super(Event, cls).__new__(cls, category, action, label, value)
+    def __new__(cls, category, action, label=None, value=None, custom1=None):
+        return super(Event, cls).__new__(cls, category, action, label, value, custom1)
 
     def get_payload(self):
         payload = {
@@ -100,6 +100,8 @@ class Event(Requestable, namedtuple('Event', 'category action label value')):
             payload['el'] = self.label
         if self.value:
             payload['ev'] = str(int(self.value))
+        if self.custom1:
+            payload['cd1'] = str(int(self.custom1))
         return payload
 
 
